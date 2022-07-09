@@ -102,6 +102,22 @@ DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("name", "Selenium 4 Test");
         capabilities.setCapability("plugin", "git-junit");
 ```
+### View performance metrics
+To view performance metrics, the following code can be used:
+
+```java
+DevTools devTools = ((HasDevTools) driver).getDevTools();
+devTools.createSession();
+
+devTools.send(Performance.enable(Optional.empty()));
+List<Metric> metricList = devTools.send(Performance.getMetrics());
+
+
+for (Metric m : metricList) {
+   System.out.println(m.getName() + " = " + m.getValue());
+   success = true;
+}
+```
 
 ### Executing the Test
 
